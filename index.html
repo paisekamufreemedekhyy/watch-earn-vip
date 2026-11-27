@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Watch &amp; Earn VIP — Video Dekho &amp; Paise Kamao</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg-main: #090b10;
+      --bg-card: #121726;
+      --bg-card-2: #0e1320;
+      --bg-input: #0b0f19;
+      --border-gold: rgba(245, 184, 46, 0.28);
+      --border-emerald: rgba(16, 185, 129, 0.34);
+      --border-subtle: #232b3e;
+      --gold-1: #f5b82e;
+      --gold-2: #fbbf24;
+      --gold-3: #d97706;
+      --emerald-1: #10b981;
+      --emerald-2: #059669;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-soft: #cbd5e1;
+      --danger: #f43f5e;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.45;
+    }
+
+    .hidden { display: none !important; }
+
+    /* Gradients & Cards */
+    .gold-bg {
+      background: linear-gradient(135deg, var(--gold-1) 0%, var(--gold-2) 50%, var(--gold-3) 100%);
+      color: #090b10;
+    }
+
+    .emerald-bg {
+      background: linear-gradient(135deg, var(--emerald-1) 0%, var(--emerald-2) 100%);
+      color: #090b10;
+    }
+
+    .gold-text {
+      background: linear-gradient(135deg, #fef08a 0%, #f5b82e 55%, #d97706 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #fbbf24;
+    }
+
+    .card {
+      background: linear-gradient(145deg, rgba(20, 26, 42, 0.96), rgba(11, 14, 24, 0.99));
+      border: 1px solid var(--border-gold);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+    }
+
+    .card-emerald {
+      background: linear-gradient(145deg, rgba(14, 42, 36, 0.82), rgba(11, 16, 26, 0.98));
+      border: 1px solid var(--border-emerald);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+    }
+
+    .card-dhamaka {
+      background: linear-gradient(135deg, rgba(120, 53, 15, 0.45), rgba(18, 24, 38, 0.97) 55%, rgba(6, 78, 59, 0.38));
+      border: 1.5px solid rgba(251, 191, 36, 0.55);
+      border-radius: 18px;
+      padding: 14px;
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Buttons & Inputs */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.12s ease, opacity 0.15s ease;
+    }
+
+    .btn:active { transform: scale(0.97); }
+    .btn-full { width: 100%; }
+
+    .btn-dark {
+      background: #141a29;
+      color: var(--text-soft);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-amber-outline {
+      background: #141a29;
+      color: #fde68a;
+      border: 1px solid rgba(245, 184, 46, 0.35);
+    }
+
+    .btn-danger {
+      background: rgba(244, 63, 94, 0.16);
+      color: #fda4af;
+      border: 1px solid rgba(244, 63, 94, 0.42);
+      padding: 8px 11px;
+      border-radius: 12px;
+      font-size: 11px;
+    }
+
+    .field-group { margin-bottom: 14px; }
+    .field-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-prefix {
+      position: absolute;
+      left: 13px;
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--gold-2);
+      pointer-events: none;
+    }
+
+    .input-box {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--bg-input);
+      border: 1px solid #2c364f;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .input-box.has-prefix { padding-left: 30px; }
+    .input-box:focus { border-color: var(--gold-2); }
+
+    /* Auth Overlay */
+    .overlay-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(9, 11, 16, 0.98);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    .auth-box {
+      width: 100%;
+      max-width: 420px;
+      margin: auto;
+    }
+
+    .auth-logo {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 8px 24px rgba(245, 184, 46, 0.3);
+    }
+
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: #080a0f;
+      border: 1px solid #1e2638;
+      border-radius: 16px;
+      padding: 5px;
+      margin: 16px 0;
+    }
+
+    .tab-btn {
+      padding: 10px;
+      border-radius: 12px;
+      border: none;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-muted);
+    }
+
+    .tab-btn.active-gold {
+      background: linear-gradient(135deg, var(--gold-1), var(--gold-2));
+      color: #090b10;
+    }
+
+    .tab-btn.active-emerald {
+      background: linear-gradient(135deg, var(--emerald-1), var(--emerald-2));
+      color: #090b10;
+    }
+
+    .error-banner {
+      background: rgba(244, 63, 94, 0.14);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: #fda4af;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 12px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .chip-btn {
+      background: #1b2336;
+      border: 1px solid rgba(245, 184, 46, 0.35);
+      color: #fde68a;
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Header & Ticker */
+    .top-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(9, 11, 16, 0.96);
+      border-bottom: 1px solid rgba(245, 184, 46, 0.22);
+    }
+
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .lang-select {
+      background: #121726;
+      border: 1px solid rgba(245, 184, 46, 0.38);
+      color: #fde68a;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 11px;
+      padding: 7px 8px;
+      outline: none;
+    }
+
+    .profile-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #121726;
+      border: 1px solid rgba(16, 185, 129, 0.38);
+      border-radius: 12px;
+      padding: 5px 8px;
+      color: #fff;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .profile-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .ticker-bar {
+      background: rgba(6, 78, 59, 0.45);
+      border-top: 1px solid rgba(16, 185, 129, 0.22);
+      padding: 6px 12px;
+      overflow: hidden;
+    }
+
+    .ticker-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .live-badge {
+      background: rgba(16, 185, 129, 0.22);
+      border: 1px solid rgba(52, 211, 153, 0.45);
+      color: #6ee7b7;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    @keyframes marqueeMove {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 28px;
+      width: max-content;
+      font-size: 11px;
+      font-weight: 600;
+      color: #e2e8f0;
+      animation: marqueeMove 26s linear infinite;
+    }
+
+    /* Main Layout */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 14px 12px 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .wallet-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .wallet-amount {
+      font-size: 34px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin: 4px 0;
+    }
+
+    .action-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      width: 100%;
+    }
+
+    @media (min-width: 600px) {
+      .action-grid-2 { width: auto; min-width: 260px; }
+      .card-dhamaka { flex-direction: row; align-items: center; justify-content: space-between; }
+    }
+
+    .progress-box {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #1e2638;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 11px;
+      background: #090c14;
+      border: 1px solid #222b40;
+      border-radius: 999px;
+      overflow: hidden;
+      padding: 1px;
+      margin-top: 6px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.4s ease;
+    }
+
+    .stats-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .stat-tile {
+      background: #0d121f;
+      border: 1px solid #1f283d;
+      border-radius: 14px;
+      padding: 10px 6px;
+      text-align: center;
+    }
+
+    .stat-tile-label { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+    .stat-tile-val { font-size: 15px; font-weight: 900; margin-top: 3px; }
+
+    /* Video Tasks Grid */
+    .grid-2-col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .grid-2-col { grid-template-columns: 1fr 1fr; }
+    }
+
+    .video-item {
+      background: linear-gradient(145deg, #131929, #0c101b);
+      border: 1px solid rgba(245, 184, 46, 0.24);
+      border-radius: 18px;
+      padding: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .video-item.locked {
+      border-color: #252e42;
+      opacity: 0.78;
+    }
+
+    .video-left {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .video-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: #1e263b;
+      color: #fde68a;
+    }
+
+    /* Lucky Wheel */
+    .wheel-stage {
+      position: relative;
+      width: 230px;
+      height: 230px;
+      margin: 12px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      width: 0;
+      height: 0;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-top: 20px solid #fef08a;
+    }
+
+    .wheel-rim {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      padding: 7px;
+      box-shadow: 0 10px 28px rgba(245, 184, 46, 0.22);
+    }
+
+    #wheelCanvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #090b10;
+      transition: transform 4.2s cubic-bezier(0.15, 0.88, 0.22, 1);
+    }
+
+    .wheel-center-btn {
+      position: absolute;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #090b10;
+      border: 2px solid #fbbf24;
+      color: #fbbf24;
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    /* Guide Lists */
+    .guide-list {
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    .guide-item {
+      background: #0e1320;
+      border: 1px solid #1f283d;
+      border-radius: 14px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+
+    .step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Modals & Popups */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(0, 0, 0, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 410px;
+      background: #121726;
+      border: 1px solid rgba(245, 184, 46, 0.4);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+    }
+
+    .video-screen {
+      margin-top: 14px;
+      border-radius: 16px;
+      background: radial-gradient(circle at center, #1b2540 0%, #090d16 100%);
+      border: 1px solid rgba(245, 184, 46, 0.3);
+      padding: 26px 16px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .countdown-num {
+      font-size: 38px;
+      font-weight: 900;
+      font-family: monospace;
+      color: #ffffff;
+      margin: 6px 0;
+    }
+
+    .slip-box {
+      background: #0b0f19;
+      border: 1px solid #222b40;
+      border-radius: 14px;
+      padding: 12px;
+      margin-top: 12px;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      text-align: left;
+    }
+
+    .slip-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .preset-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .toast-bar {
+      position: fixed;
+      top: 74px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 70;
+      width: calc(100% - 28px);
+      max-width: 380px;
+      background: #121829;
+      border: 1px solid rgba(251, 191, 36, 0.6);
+      border-radius: 14px;
+      padding: 11px 14px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75);
+    }
+
+    .live-payout-toast {
+      position: fixed;
+      bottom: 14px;
+      left: 14px;
+      right: 14px;
+      max-width: 340px;
+      z-index: 35;
+      background: #101827;
+      border: 1px solid rgba(16, 185, 129, 0.55);
+      border-radius: 15px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =====================================================================
+       1. CREATE ACCOUNT & LOGIN SCREEN
+       ===================================================================== -->
+  <div id="authOverlay" class="overlay-screen">
+    <div class="card auth-box">
+      <div style="text-align:center;">
+        <div class="auth-logo gold-bg">👑</div>
+        <h1 style="margin:0; font-size:24px; font-weight:900;">
+          <span class="gold-text">Watch &amp; Earn VIP</span>
+        </h1>
+        <p style="margin:5px 0 0; font-size:12px; color:#cbd5e1;">
+          Naya VIP account banayein ya apne purane account mein Login karein
+        </p>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" id="tabSignupBtn" onclick="switchAuthTab('signup')" class="tab-btn active-gold">
+          Create Account
+        </button>
+        <button type="button" id="tabLoginBtn" onclick="switchAuthTab('login')" class="tab-btn">
+          Login
+        </button>
+      </div>
+
+      <!-- SIGN UP FORM -->
+      <form id="signupForm" onsubmit="handleSignupSubmit(event)">
+        <div class="field-group">
+          <label class="field-label">Naya Username Chunein (Min 3 Akshar)</label>
+          <div class="input-wrap">
+            <span class="input-prefix">@</span>
+            <input id="signupUsernameInput" class="input-box has-prefix" type="text" required minlength="3" maxlength="18" placeholder="rahul_vip" />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Password Banayein (Min 4 Akshar)</label>
+          <input id="signupPasswordInput" class="input-box" type="password" required minlength="4" placeholder="••••••••" />
+        </div>
+
+        <div id="signupErrorMsg" class="error-banner hidden"></div>
+
+        <button type="submit" class="btn btn-full gold-bg">
+          ➕ Create VIP Account
+        </button>
+
+        <p style="text-align:center; font-size:12px; color:#94a3b8; margin:12px 0 0;">
+          Pehle se account hai?
+          <button type="button" onclick="switchAuthTab('login')" style="background:none; border:none; color:#fbbf24; font-weight:800; text-decoration:underline; cursor:pointer;">
+            Yahan Login Karein
+          </button>
+        </p>
+      </form>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="hidden">
+        <div class="field-group">
+          <label class="field-label">Apna Username Dalein</label>
+          <div class="input-wrap">
+            <span class="input-prefix" style="color:#34d399;">@</span>
+            <input id="loginUsernameInput" class="input-box has-prefix" type="text" required minlength="3" maxlength="18" placeholder="rahul_vip" />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Apna Password Dalein</label>
+          <input id="loginPasswordInput" class="input-box" type="password" required minlength="4" placeholder="••••••••" />
+        </div>
+
+        <div id="loginErrorMsg" class="error-banner hidden"></div>
+
+        <button type="submit" class="btn btn-full emerald-bg">
+          🔓 Login to VIP Wallet
+        </button>
+
+        <div id="savedAccountsHintBox" class="hidden" style="margin-top:12px; padding:10px; border-radius:12px; background:#0b0f19; border:1px solid #1f283d;">
+          <div style="font-size:11px; font-weight:700; color:#fbbf24;">Saved Accounts on This Device (Tap to Fill):</div>
+          <div id="savedAccountsChips" class="chip-list"></div>
+        </div>
+
+        <p style="text-align:center; font-size:12px; color:#94a3b8; margin:12px 0 0;">
+          Naya account banana hai?
+          <button type="button" onclick="switchAuthTab('signup')" style="background:none; border:none; color:#34d399; font-weight:800; text-decoration:underline; cursor:pointer;">
+            Create Account
+          </button>
+        </p>
+      </form>
+
+      <div style="margin-top:16px; padding-top:12px; border-top:1px solid #1e2638; display:flex; justify-content:space-between; font-size:11px; color:#94a3b8;">
+        <span style="color:#34d399; font-weight:700;">✔ Saved Wallet Balance</span>
+        <span>Min Withdraw: <strong style="color:#fde68a;">₹300</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       2. TOP STICKY HEADER + LIVE PAYOUT TICKER
+       ===================================================================== -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand-wrap">
+        <div class="brand-icon gold-bg">▶</div>
+        <div style="min-width:0;">
+          <div class="gold-text" style="font-size:14px; font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+            Watch &amp; Earn VIP
+          </div>
+          <div data-i18n="headerTagline" style="font-size:10px; color:#34d399; font-weight:700;">
+            Watch Videos • Spin • Earn ₹
+          </div>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <select id="languageSelector" onchange="changeLanguage(this.value)" class="lang-select" aria-label="Language">
+          <option value="hinglish">🌐 Hinglish</option>
+          <option value="en">🇬🇧 English</option>
+          <option value="hi">🇮🇳 हिंदी</option>
+          <option value="mr">🚩 मराठी</option>
+          <option value="bn">🐯 বাংলা</option>
+        </select>
+
+        <button type="button" onclick="openProfileModal()" class="profile-pill">
+          <div class="profile-avatar emerald-bg">👤</div>
+          <div style="line-height:1.15;">
+            <div id="headerUsername" style="font-size:11px; font-weight:800; max-width:72px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">@guest</div>
+            <div style="font-size:9px; font-family:monospace; font-weight:700; color:#fbbf24;">ID: <span id="headerUserId">000000</span></div>
+          </div>
+        </button>
+
+        <button type="button" onclick="logoutUser()" class="btn btn-danger" title="Logout">
+          🚪 <span data-i18n="btnLogout">Logout</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="ticker-bar">
+      <div class="ticker-inner">
+        <span class="live-badge">● LIVE</span>
+        <div style="overflow:hidden; flex:1;">
+          <div id="marqueeTrack" class="marquee-track"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       3. MAIN APP CONTENT
+       ===================================================================== -->
+  <main class="container">
+
+    <!-- WALLET DASHBOARD + DHAMAKA DIRECT WITHDRAW OFFER -->
+    <section class="card">
+      <div class="wallet-top">
+        <div>
+          <div data-i18n="walletLabel" style="font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; color:#fbbf24;">
+            💳 Total VIP Wallet Balance
+          </div>
+          <div class="wallet-amount">
+            ₹<span id="walletBalanceDisplay">0.00</span>
+            <span style="font-size:11px; font-weight:800; color:#34d399; background:rgba(16,185,129,0.16); border:1px solid rgba(16,185,129,0.35); padding:2px 7px; border-radius:8px; vertical-align:middle;">INR</span>
+          </div>
+          <div style="font-size:12px; color:#94a3b8;">
+            <span data-i18n="minWithdrawLabel">Minimum Withdraw Limit:</span>
+            <strong style="color:#fde68a;">₹300.00</strong>
+          </div>
+        </div>
+
+        <div class="action-grid-2">
+          <button type="button" onclick="handleWithdrawClick()" class="btn emerald-bg">
+            💸 <span data-i18n="btnWithdraw">Withdraw</span>
+          </button>
+          <button type="button" onclick="openAddCreditModal()" class="btn gold-bg">
+            ➕ <span data-i18n="btnAddCredit">Add Credit</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-box">
+        <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700;">
+          <span id="progressStatusText" style="color:#cbd5e1;">₹300.00 more needed to unlock Withdraw</span>
+          <span id="progressPercentText" style="color:#fbbf24; font-family:monospace;">0%</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div id="withdrawProgressBar" style="width:0%;" class="progress-bar-fill gold-bg"></div>
+        </div>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="stats-grid-3">
+        <div class="stat-tile">
+          <div class="stat-tile-label" data-i18n="statVideos">Videos Watched</div>
+          <div id="statVideosCount" class="stat-tile-val" style="color:#fff;">0</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile-label" data-i18n="statSpins">Spins Left</div>
+          <div id="statSpinsLeft" class="stat-tile-val" style="color:#fbbf24;">2 / 2</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-tile-label" data-i18n="statInvites">Friends Invited</div>
+          <div id="statInvitesCount" class="stat-tile-val" style="color:#34d399;">0</div>
+        </div>
+      </div>
+
+      <!-- DHAMAKA OFFER BANNER -->
+      <div class="card-dhamaka">
+        <div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+            <span class="gold-bg" style="font-size:10px; font-weight:900; padding:2px 8px; border-radius:6px;">🔥 DHAMAKA OFFER</span>
+            <span data-i18n="dhamakaBadge" style="font-size:11px; font-weight:700; color:#6ee7b7;">Direct Withdraw Fast-Track</span>
+          </div>
+          <div data-i18n="dhamakaText" style="font-size:13px; font-weight:800; color:#ffffff;">
+            ₹300 tak nahi poch pa rahe? Abhi <span style="color:#fbbf24;">₹100 Add Credit</span> karo + <span style="color:#34d399;">₹200 Bonus</span> pao = <span style="color:#fef08a; text-decoration:underline;">Direct Withdraw</span>!
+          </div>
+        </div>
+        <button type="button" onclick="openDhamakaOfferModal()" class="btn gold-bg" style="flex-shrink:0;">
+          🔥 <span data-i18n="btnClaimDhamaka">Claim Offer</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 8 VIP VIDEO TASKS (1x PER DAY + LOCKED UNTIL TOMORROW) -->
+    <section>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:10px;">
+        <div>
+          <h2 style="margin:0; font-size:17px; font-weight:900; color:#fff;">
+            🎬 <span data-i18n="videoSectionTitle">8 VIP Video Tasks</span>
+          </h2>
+          <p data-i18n="videoSectionSub" style="margin:2px 0 0; font-size:11px; color:#94a3b8;">
+            Har video din mein sirf 1 baar ₹ dega — aaj complete hone ke baad kal tak lock
+          </p>
+        </div>
+        <span style="font-size:11px; font-weight:800; padding:4px 9px; border-radius:10px; background:rgba(16,185,129,0.16); border:1px solid rgba(16,185,129,0.35); color:#6ee7b7; flex-shrink:0;">
+          ₹52.50 / Day
+        </span>
+      </div>
+
+      <div id="videoTasksGrid" class="grid-2-col"></div>
+    </section>
+
+    <!-- LUCKY CHAKRA SPIN + INVITE & EARN (₹50 / FRIEND) -->
+    <section class="grid-2-col">
+      <!-- Lucky Chakra -->
+      <div class="card" style="text-align:center;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+          <span style="font-size:12px; font-weight:900; color:#fbbf24; text-transform:uppercase;">
+            🎡 <span data-i18n="spinTitle">Lucky Chakra Spin</span>
+          </span>
+          <span id="spinBadgeCount" style="font-size:11px; font-weight:700; padding:2px 9px; border-radius:99px; background:rgba(245,184,46,0.16); border:1px solid rgba(245,184,46,0.35); color:#fde68a;">
+            2 Free Spins
+          </span>
+        </div>
+
+        <p data-i18n="spinSub" style="margin:0 0 8px; font-size:12px; color:#94a3b8;">
+          ₹0.50–₹3.00 rewards + <strong style="color:#fbbf24;">1x ₹100 Jackpot</strong> slice!
+        </p>
+
+        <div class="wheel-stage">
+          <div class="wheel-pointer"></div>
+          <div class="wheel-rim gold-bg">
+            <canvas id="wheelCanvas" width="240" height="240"></canvas>
+          </div>
+          <button type="button" onclick="spinLuckyWheel()" class="wheel-center-btn">SPIN</button>
+        </div>
+
+        <button type="button" onclick="spinLuckyWheel()" class="btn btn-full gold-bg" style="margin-top:8px;">
+          ✨ <span data-i18n="btnSpinNow">Spin Chakra Now</span>
+        </button>
+      </div>
+
+      <!-- Invite & Earn -->
+      <div class="card-emerald" style="display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <span style="font-size:12px; font-weight:900; color:#34d399; text-transform:uppercase;">
+              🤝 <span data-i18n="inviteTitle">Invite &amp; Earn</span>
+            </span>
+            <span style="font-size:11px; font-weight:900; padding:3px 9px; border-radius:10px; background:rgba(16,185,129,0.22); border:1px solid rgba(52,211,153,0.4); color:#a7f3d0;">
+              ₹50 / Friend
+            </span>
+          </div>
+
+          <h3 data-i18n="inviteHeading" style="margin:0; font-size:18px; font-weight:900; color:#fff;">
+            1 Friend Invite = <span style="color:#34d399;">₹50 Direct Bonus!</span>
+          </h3>
+          <p data-i18n="inviteDesc" style="margin:6px 0 12px; font-size:12px; color:#cbd5e1;">
+            Sirf <strong style="color:#fbbf24;">6 doston</strong> ko invite karein aur seedha <strong style="color:#34d399;">₹300</strong> poora karke instant withdraw lagayein!
+          </p>
+
+          <label class="field-label" style="font-size:11px; color:#94a3b8;">Aapka Personal Referral Link</label>
+          <div style="display:flex; gap:6px; background:#090c14; border:1px solid #222b40; border-radius:14px; padding:5px;">
+            <input id="referralLinkInput" type="text" readonly value="https://watch-earn-vip.app/?ref=000000" style="background:transparent; border:none; color:#fde68a; font-family:monospace; font-size:11px; font-weight:700; padding:6px 8px; width:100%; outline:none;" />
+            <button type="button" onclick="copyReferralLink()" class="btn gold-bg" style="padding:7px 12px; border-radius:10px; font-size:11px; flex-shrink:0;">
+              📋 <span data-i18n="btnCopy">Copy</span>
+            </button>
+          </div>
+
+          <div style="margin-top:10px; padding:10px 12px; border-radius:12px; background:#090d16; border:1px solid rgba(16,185,129,0.25); display:flex; justify-content:space-between; font-size:12px;">
+            <span style="color:#cbd5e1;">Total Invite Earnings:</span>
+            <strong style="color:#34d399; font-size:14px;">₹<span id="inviteEarnedDisplay">0.00</span></strong>
+          </div>
+        </div>
+
+        <div style="margin-top:12px; display:flex; flex-direction:column; gap:8px;">
+          <div class="action-grid-2" style="width:100%;">
+            <button type="button" onclick="shareInviteLink('telegram')" class="btn" style="background:rgba(14,165,233,0.2); border:1px solid rgba(56,189,248,0.45); color:#bae6fd; font-size:12px; padding:10px;">
+              ✈️ Telegram
+            </button>
+            <button type="button" onclick="shareInviteLink('whatsapp')" class="btn" style="background:rgba(16,185,129,0.2); border:1px solid rgba(52,211,153,0.45); color:#a7f3d0; font-size:12px; padding:10px;">
+              💬 WhatsApp
+            </button>
+          </div>
+          <button type="button" onclick="simulateFriendInvite()" class="btn btn-full btn-amber-outline" style="font-size:11px; padding:10px;">
+            ➕ Claim Verified Friend Invite (+₹50)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KAISE KAMAYE & GAME RULES -->
+    <section class="grid-2-col">
+      <div class="card">
+        <h3 style="margin:0; font-size:16px; font-weight:900; color:#fff;">
+          💡 <span data-i18n="howToEarnTitle">Kaise Kamaye? (4 Easy Steps)</span>
+        </h3>
+        <ol class="guide-list">
+          <li class="guide-item">
+            <span class="step-num gold-bg">1</span>
+            <div><strong style="color:#fff;">Video Watch Tasks (1x Daily):</strong> 10s se 5m ke 8 videos dekhein — din mein 1 baar ₹1.50 se ₹15.00 tak milta hai, phir kal tak lock.</div>
+          </li>
+          <li class="guide-item">
+            <span class="step-num gold-bg">2</span>
+            <div><strong style="color:#fff;">Daily Lucky Chakra Spin:</strong> Roz 2 free spins ghumayein aur ₹0.50–₹3.00 ya ₹100 Jackpot jeetein.</div>
+          </li>
+          <li class="guide-item">
+            <span class="step-num gold-bg">3</span>
+            <div><strong style="color:#fff;">Invite Friends (₹50/Friend):</strong> Apna referral link share karein — har 1 friend par ₹50 bonus milta hai.</div>
+          </li>
+          <li class="guide-item">
+            <span class="step-num emerald-bg">4</span>
+            <div><strong style="color:#fff;">Dhamaka Direct Withdraw Offer:</strong> ₹300 tak nahi pahunch pa rahe toh ₹100 Add Credit + ₹200 Bonus le kar Direct Withdraw karein.</div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:0; font-size:16px; font-weight:900; color:#fff;">
+          🛡️ <span data-i18n="rulesTitle">Game Rules &amp; Withdraw Tips</span>
+        </h3>
+        <ul class="guide-list">
+          <li class="guide-item">
+            <span>🔒</span>
+            <div><strong style="color:#fff;">Once Daily Video Reward:</strong> Aaj jis video ka reward mil jayega, woh aaj ke liye lock ho jayega aur kal naye din unlock hoga.</div>
+          </li>
+          <li class="guide-item">
+            <span>💰</span>
+            <div><strong style="color:#fff;">Minimum ₹300 Withdraw:</strong> Wallet mein ₹300.00 hone par UPI / PhonePe / GPay withdraw request lagegi.</div>
+          </li>
+          <li class="guide-item">
+            <span>✈️</span>
+            <div><strong style="color:#fff;">Official Admin Telegram:</strong> Withdraw, Add Credit aur Dhamaka Offer requests seedha Admin <strong style="color:#7dd3fc;">@Royalbhaipredit654h</strong> par verify hoti hain.</div>
+          </li>
+          <li class="guide-item">
+            <span>🔐</span>
+            <div><strong style="color:#fff;">Saved Account Security:</strong> Logout karne par aapka wallet balance aur VIP ID safe rehta hai — kabhi bhi wapas Login kar sakte hain.</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FLOATING LIVE WITHDRAWAL POPUP -->
+  <div id="livePayoutPopup" class="live-payout-toast hidden">
+    <div class="emerald-bg" style="width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:900; flex-shrink:0;">✔</div>
+    <div style="min-width:0; flex:1;">
+      <div id="livePopupTitle" style="font-size:12px; font-weight:800; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">User rahul_92 successfully withdrew ₹350!</div>
+      <div id="livePopupSub" style="font-size:10px; font-weight:700; color:#6ee7b7;">UPI Payout Verified • Just now</div>
+    </div>
+  </div>
+
+  <!-- MODAL A: VIDEO PLAYER MODAL -->
+  <div id="videoPlayerModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
+        <span id="playerModalDurationBadge" class="badge-pill">10 sec • 1x Daily</span>
+        <button type="button" onclick="attemptCloseVideoModal()" class="btn btn-dark" style="padding:6px 10px; border-radius:10px;">✕</button>
+      </div>
+
+      <h3 id="playerModalTitle" style="margin:10px 0 4px; font-size:18px; font-weight:900;">Short Promo Clip</h3>
+      <div style="font-size:12px; color:#94a3b8;">
+        Reward: <strong id="playerModalReward" style="color:#34d399;">₹1.50</strong> — Timer poora hone tak rukein
+      </div>
+
+      <div class="video-screen">
+        <div style="font-size:11px; font-weight:800; letter-spacing:1px; color:#fbbf24;">▶ VIP SPONSOR STREAM PLAYING...</div>
+        <div id="playerCountdownDisplay" class="countdown-num">00:10</div>
+        <div class="progress-bar-bg" style="margin-top:12px;">
+          <div id="playerProgressBar" style="width:0%;" class="progress-bar-fill gold-bg"></div>
+        </div>
+      </div>
+
+      <div id="earlyExitWarning" class="hidden" style="margin-top:12px; padding:12px; border-radius:14px; background:rgba(244,63,94,0.15); border:1px solid rgba(244,63,94,0.45); font-size:12px; color:#fecdd3;">
+        <strong>⚠️ Timer abhi poora nahi hua hai!</strong>
+        <div style="margin-top:3px; font-size:11px;">Abhi band karne par <strong id="warningRewardText">₹1.50</strong> wallet mein add nahi hoga.</div>
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button type="button" onclick="hideEarlyExitWarning()" class="btn emerald-bg" style="flex:1; padding:9px;">Continue Watching</button>
+          <button type="button" onclick="forceCloseVideoModal()" class="btn btn-danger" style="padding:9px 12px;">Exit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL B: PROFILE MODAL -->
+  <div id="profileModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h3 style="margin:0; font-size:17px; font-weight:900;">👑 VIP Account Profile</h3>
+        <button type="button" onclick="closeModal('profileModal')" class="btn btn-dark" style="padding:6px 10px;">✕</button>
+      </div>
+      <div class="slip-box">
+        <div class="slip-row"><span style="color:#94a3b8;">Username:</span><strong id="profileModalUsername">@user</strong></div>
+        <div class="slip-row"><span style="color:#94a3b8;">VIP User ID:</span><strong id="profileModalUserId" style="color:#fbbf24; font-family:monospace;">000000</strong></div>
+        <div class="slip-row"><span style="color:#94a3b8;">Wallet Balance:</span><strong id="profileModalBalance" style="color:#34d399;">₹0.00</strong></div>
+        <div class="slip-row"><span style="color:#94a3b8;">Videos Watched:</span><strong id="profileModalTasks">0</strong></div>
+        <div class="slip-row"><span style="color:#94a3b8;">Friends Invited:</span><strong id="profileModalInvites">0</strong></div>
+      </div>
+      <button type="button" onclick="logoutUser()" class="btn btn-full btn-danger" style="margin-top:14px; padding:12px; font-size:13px;">
+        🚪 Logout Account
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL C: SHORTFALL NOTICE MODAL -->
+  <div id="shortfallModal" class="modal-backdrop hidden">
+    <div class="modal-card" style="text-align:center;">
+      <div style="font-size:34px; margin-bottom:6px;">🔒</div>
+      <h3 style="margin:0; font-size:18px; font-weight:900;">Minimum ₹300 Required</h3>
+      <p style="margin:8px 0 14px; font-size:12px; color:#cbd5e1;">
+        Aapke wallet mein abhi <strong>₹<span id="shortfallCurrentBal">0.00</span></strong> hain. ₹300 tak nahi poch pa rahe? Dhamaka Offer se <strong style="color:#fbbf24;">₹100 Add Credit + ₹200 Bonus</strong> le kar Direct Withdraw karein!
+      </p>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button type="button" onclick="closeModal('shortfallModal'); openDhamakaOfferModal();" class="btn btn-full gold-bg">
+          🔥 Dhamaka Offer: ₹100 + ₹200 Bonus
+        </button>
+        <button type="button" onclick="closeModal('shortfallModal')" class="btn btn-full btn-dark">
+          Watch More Videos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL D: WITHDRAW FORM MODAL -->
+  <div id="withdrawFormModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 style="margin:0; font-size:17px; font-weight:900;">💸 UPI Withdraw Request</h3>
+        <button type="button" onclick="closeModal('withdrawFormModal')" class="btn btn-dark" style="padding:6px 10px;">✕</button>
+      </div>
+      <form onsubmit="submitWithdrawRequest(event)">
+        <div class="field-group">
+          <label class="field-label">Withdraw Amount (Min ₹300)</label>
+          <input id="withdrawAmountInput" class="input-box" type="number" step="0.01" min="300" required />
+        </div>
+        <div class="field-group">
+          <label class="field-label">UPI ID / PhonePe / GPay Number</label>
+          <input id="withdrawUpiInput" class="input-box" type="text" required placeholder="rahul@ybl ya 9876543210" />
+        </div>
+        <button type="submit" class="btn btn-full emerald-bg">
+          Generate Withdraw Slip ➔
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL E: WITHDRAW SUCCESS -> @Royalbhaipredit654h -->
+  <div id="withdrawSuccessModal" class="modal-backdrop hidden">
+    <div class="modal-card" style="text-align:center;">
+      <div class="emerald-bg" style="width:48px; height:48px; border-radius:50%; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:900;">✔</div>
+      <h3 style="margin:0; font-size:19px; font-weight:900;">Withdraw Request Success!</h3>
+      <p style="margin:6px 0 0; font-size:12px; color:#cbd5e1;">
+        Approval ke liye neeche button par click karke request slip Admin <strong style="color:#7dd3fc;">@Royalbhaipredit654h</strong> ko Telegram par bhejein:
+      </p>
+
+      <div class="slip-box">
+        <div class="slip-row"><span style="color:#94a3b8;">Request ID:</span><strong id="slipReqId" style="color:#fbbf24; font-family:monospace;">WD-00000</strong></div>
+        <div class="slip-row"><span style="color:#94a3b8;">User:</span><strong id="slipUser">@user (000000)</strong></div>
+        <div class="slip-row"><span style="color:#94a3b8;">UPI / Number:</span><strong id="slipUpi" style="color:#34d399;">user@upi</strong></div>
+        <div class="slip-row"><span style="color:#94a3b8;">Amount:</span><strong id="slipAmount" style="color:#34d399; font-size:14px;">₹300.00</strong></div>
+      </div>
+
+      <a id="telegramWithdrawAnchor" href="https://t.me/Royalbhaipredit654h" target="_blank" rel="noopener noreferrer" class="btn btn-full emerald-bg" style="margin-top:14px;">
+        ✈️ Send to @Royalbhaipredit654h
+      </a>
+      <button type="button" onclick="copyWithdrawSlip()" class="btn btn-full btn-amber-outline" style="margin-top:8px; font-size:12px;">
+        📋 1-Click Copy Message
+      </button>
+      <button type="button" onclick="closeModal('withdrawSuccessModal')" style="background:none; border:none; color:#94a3b8; font-size:12px; margin-top:10px; cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL F: ADD CREDIT -> @Royalbhaipredit654h -->
+  <div id="addCreditModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:12px; font-weight:900; color:#fbbf24;">⚡ ADD VIP WALLET CREDIT</span>
+        <button type="button" onclick="closeModal('addCreditModal')" class="btn btn-dark" style="padding:6px 10px;">✕</button>
+      </div>
+      <h3 style="margin:8px 0 4px; font-size:17px; font-weight:900;">Instant Top-Up via Admin DM</h3>
+      <p style="margin:0; font-size:12px; color:#cbd5e1;">
+        Amount chunein aur Telegram (<strong style="color:#7dd3fc;">@Royalbhaipredit654h</strong>) par DM bhejein:
+      </p>
+
+      <div class="preset-grid-4">
+        <button type="button" onclick="setCreditAmount(50)" class="btn btn-dark" style="padding:10px 4px;">₹50</button>
+        <button type="button" onclick="setCreditAmount(100)" class="btn btn-amber-outline" style="padding:10px 4px;">₹100</button>
+        <button type="button" onclick="setCreditAmount(150)" class="btn btn-dark" style="padding:10px 4px;">₹150</button>
+        <button type="button" onclick="setCreditAmount(200)" class="btn btn-dark" style="padding:10px 4px;">₹200</button>
+      </div>
+
+      <div class="field-group" style="margin-top:12px;">
+        <label class="field-label">Top-Up Amount (₹)</label>
+        <input id="creditAmountInput" class="input-box" type="number" min="10" value="100" oninput="refreshCreditTelegramLinks()" />
+      </div>
+
+      <a id="telegramCreditAnchor" href="https://t.me/Royalbhaipredit654h" target="_blank" rel="noopener noreferrer" class="btn btn-full gold-bg">
+        ✈️ DM @Royalbhaipredit654h (Add ₹<span id="creditBtnAmountText">100</span>)
+      </a>
+      <button type="button" onclick="copyCreditSlip()" class="btn btn-full btn-amber-outline" style="margin-top:8px; font-size:12px;">
+        📋 1-Click Copy Message
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL G: DHAMAKA DIRECT WITHDRAW OFFER -> @Royalbhaipredit654h -->
+  <div id="dhamakaOfferModal" class="modal-backdrop hidden">
+    <div class="modal-card" style="text-align:center; border-color:rgba(251,191,36,0.65);">
+      <div class="gold-bg" style="width:50px; height:50px; border-radius:16px; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:24px;">🔥</div>
+      <span style="font-size:10px; font-weight:900; padding:3px 9px; border-radius:99px; background:rgba(245,184,46,0.2); border:1px solid rgba(245,184,46,0.45); color:#fde68a;">
+        VIP DHAMAKA OFFER
+      </span>
+      <h3 style="margin:8px 0 4px; font-size:19px; font-weight:900;">Direct Withdraw Unlock Offer</h3>
+      <p style="margin:0; font-size:12px; color:#cbd5e1;">
+        ₹300 tak nahi poch pa rahe? Abhi <strong style="color:#fbbf24;">₹100 Add Credit</strong> karo + <strong style="color:#34d399;">₹200 Bonus</strong> pao = <strong style="color:#fef08a;">Direct Withdraw</strong>!
+      </p>
+
+      <div class="slip-box">
+        <div class="slip-row"><span style="color:#94a3b8;">Add Credit:</span><strong style="color:#fbbf24;">₹100.00</strong></div>
+        <div class="slip-row"><span style="color:#94a3b8;">Dhamaka Bonus:</span><strong style="color:#34d399;">+₹200.00</strong></div>
+        <div class="slip-row" style="border-top:1px solid #1e2638; padding-top:6px;"><span style="color:#cbd5e1;">Benefit:</span><strong style="color:#fff;">Direct Withdraw Eligible</strong></div>
+      </div>
+
+      <a id="telegramDhamakaAnchor" href="https://t.me/Royalbhaipredit654h" target="_blank" rel="noopener noreferrer" class="btn btn-full gold-bg" style="margin-top:14px;">
+        ✈️ DM @Royalbhaipredit654h (₹100 + ₹200 Bonus)
+      </a>
+      <button type="button" onclick="copyDhamakaSlip()" class="btn btn-full btn-amber-outline" style="margin-top:8px; font-size:12px;">
+        📋 1-Click Copy Message
+      </button>
+      <button type="button" onclick="closeModal('dhamakaOfferModal')" style="background:none; border:none; color:#94a3b8; font-size:12px; margin-top:10px; cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="appToast" class="toast-bar hidden">
+    <span id="appToastIcon" style="font-size:16px;">✨</span>
+    <span id="appToastText"></span>
+  </div>
+
+  <!-- =====================================================================
+       JAVASCRIPT APPLICATION LOGIC
+       ===================================================================== -->
+  <script>
+    const USERS_DB_KEY = "watch_earn_users_db";
+    const CURRENT_USER_KEY = "watch_earn_current_user";
+    const ADMIN_TELEGRAM = "Royalbhaipredit654h";
+    const MIN_WITHDRAW = 300;
+    const INVITE_BONUS = 50;
+    const MAX_DAILY_SPINS = 2;
+
+    const VIDEO_TASKS = [
+      { id: 1, title: "Short Promo Clip", duration: 10, durationLabel: "10 sec", reward: 1.50, tag: "Quick" },
+      { id: 2, title: "Trending Reel Task", duration: 20, durationLabel: "20 sec", reward: 2.50, tag: "Popular" },
+      { id: 3, title: "Brand Story Ad", duration: 30, durationLabel: "30 sec", reward: 3.50, tag: "Hot" },
+      { id: 4, title: "App Review Short", duration: 45, durationLabel: "45 sec", reward: 4.50, tag: "Bonus" },
+      { id: 5, title: "VIP Sponsor Video", duration: 60, durationLabel: "1 min", reward: 6.00, tag: "VIP" },
+      { id: 6, title: "Featured Gaming Clip", duration: 120, durationLabel: "2 min", reward: 8.50, tag: "Pro" },
+      { id: 7, title: "Exclusive Partner Show", duration: 180, durationLabel: "3 min", reward: 11.00, tag: "Elite" },
+      { id: 8, title: "Mega Bonus Documentary", duration: 300, durationLabel: "5 min", reward: 15.00, tag: "Mega" }
+    ];
+
+    const WHEEL_SEGMENTS = [
+      { label: "₹0.50", value: 0.50, jackpot: false, color: "#111827", text: "#fbbf24" },
+      { label: "₹1.00", value: 1.00, jackpot: false, color: "#064e3b", text: "#6ee7b7" },
+      { label: "₹1.50", value: 1.50, jackpot: false, color: "#1e293b", text: "#fde68a" },
+      { label: "₹2.00", value: 2.00, jackpot: false, color: "#78350f", text: "#fef08a" },
+      { label: "₹0.50", value: 0.50, jackpot: false, color: "#111827", text: "#fbbf24" },
+      { label: "₹2.50", value: 2.50, jackpot: false, color: "#065f46", text: "#a7f3d0" },
+      { label: "₹3.00", value: 3.00, jackpot: false, color: "#1e293b", text: "#fde68a" },
+      { label: "₹100 JACKPOT", value: 100.00, jackpot: true, color: "#b45309", text: "#fef08a" }
+    ];
+
+    const LIVE_PAYOUTS = [
+      { user: "rahul_92", amount: "₹350", method: "UPI", time: "Just now" },
+      { user: "priya_v", amount: "₹500", method: "PhonePe", time: "1m ago" },
+      { user: "aman_vip", amount: "₹300", method: "GPay", time: "2m ago" },
+      { user: "sneha_k", amount: "₹420", method: "UPI", time: "3m ago" },
+      { user: "vikram_07", amount: "₹600", method: "Paytm", time: "4m ago" },
+      { user: "neha_star", amount: "₹310", method: "PhonePe", time: "5m ago" }
+    ];
+
+    const TRANSLATIONS = {
+      hinglish: {
+        headerTagline: "Watch Videos • Spin • Earn ₹",
+        btnLogout: "Logout",
+        walletLabel: "💳 Total VIP Wallet Balance",
+        minWithdrawLabel: "Minimum Withdraw Limit:",
+        btnWithdraw: "Withdraw",
+        btnAddCredit: "Add Credit",
+        statVideos: "Videos Watched",
+        statSpins: "Spins Left",
+        statInvites: "Friends Invited",
+        dhamakaBadge: "Direct Withdraw Fast-Track",
+        dhamakaText: '₹300 tak nahi poch pa rahe? Abhi <span style="color:#fbbf24;">₹100 Add Credit</span> karo + <span style="color:#34d399;">₹200 Bonus</span> pao = <span style="color:#fef08a; text-decoration:underline;">Direct Withdraw</span>!',
+        btnClaimDhamaka: "Claim Offer",
+        videoSectionTitle: "8 VIP Video Tasks",
+        videoSectionSub: "Har video din mein sirf 1 baar ₹ dega — aaj complete hone ke baad kal tak lock",
+        spinTitle: "Lucky Chakra Spin",
+        spinSub: '₹0.50–₹3.00 rewards + <strong style="color:#fbbf24;">1x ₹100 Jackpot</strong> slice!',
+        btnSpinNow: "Spin Chakra Now",
+        inviteTitle: "Invite & Earn",
+        inviteHeading: '1 Friend Invite = <span style="color:#34d399;">₹50 Direct Bonus!</span>',
+        inviteDesc: 'Sirf <strong style="color:#fbbf24;">6 doston</strong> ko invite karein aur seedha <strong style="color:#34d399;">₹300</strong> poora karke instant withdraw lagayein!',
+        btnCopy: "Copy",
+        howToEarnTitle: "Kaise Kamaye? (4 Easy Steps)",
+        rulesTitle: "Game Rules & Withdraw Tips"
+      },
+      en: {
+        headerTagline: "Watch Videos • Spin • Earn ₹",
+        btnLogout: "Logout",
+        walletLabel: "💳 Total VIP Wallet Balance",
+        minWithdrawLabel: "Minimum Withdraw Limit:",
+        btnWithdraw: "Withdraw",
+        btnAddCredit: "Add Credit",
+        statVideos: "Videos Watched",
+        statSpins: "Spins Left",
+        statInvites: "Friends Invited",
+        dhamakaBadge: "Direct Withdraw Fast-Track",
+        dhamakaText: 'Can’t reach ₹300 yet? <span style="color:#fbbf24;">Add ₹100 Credit</span> + Get <span style="color:#34d399;">₹200 Bonus</span> = <span style="color:#fef08a; text-decoration:underline;">Direct Withdraw</span>!',
+        btnClaimDhamaka: "Claim Offer",
+        videoSectionTitle: "8 VIP Video Tasks",
+        videoSectionSub: "Each video rewards once per day — locks until tomorrow after completion",
+        spinTitle: "Lucky Chakra Spin",
+        spinSub: '₹0.50–₹3.00 rewards + <strong style="color:#fbbf24;">1x ₹100 Jackpot</strong> slice!',
+        btnSpinNow: "Spin Chakra Now",
+        inviteTitle: "Invite & Earn",
+        inviteHeading: '1 Friend Invite = <span style="color:#34d399;">₹50 Direct Bonus!</span>',
+        inviteDesc: 'Invite just <strong style="color:#fbbf24;">6 friends</strong> to reach <strong style="color:#34d399;">₹300</strong> and request an instant UPI withdrawal!',
+        btnCopy: "Copy",
+        howToEarnTitle: "How to Earn? (4 Easy Steps)",
+        rulesTitle: "Game Rules & Withdraw Tips"
+      },
+      hi: {
+        headerTagline: "वीडियो देखें • स्पिन करें • ₹ कमाएं",
+        btnLogout: "लॉगआउट",
+        walletLabel: "💳 कुल VIP वॉलेट बैलेंस",
+        minWithdrawLabel: "न्यूनतम निकासी सीमा:",
+        btnWithdraw: "पैसे निकालें",
+        btnAddCredit: "क्रेडिट जोड़ें",
+        statVideos: "वीडियो देखे",
+        statSpins: "बचे हुए स्पिन",
+        statInvites: "आमंत्रित मित्र",
+        dhamakaBadge: "डायरेक्ट विथड्रॉ ऑफर",
+        dhamakaText: '₹300 तक नहीं पहुंच पा रहे? अभी <span style="color:#fbbf24;">₹100 क्रेडिट जोड़ें</span> + <span style="color:#34d399;">₹200 बोनस</span> पाएं = <span style="color:#fef08a; text-decoration:underline;">डायरेक्ट विथड्रॉ</span>!',
+        btnClaimDhamaka: "ऑफर लें",
+        videoSectionTitle: "8 VIP वीडियो टास्क",
+        videoSectionSub: "हर वीडियो दिन में केवल 1 बार इनाम देगा — आज पूरा होने के बाद कल तक लॉक",
+        spinTitle: "लकी चक्र स्पिन",
+        spinSub: '₹0.50–₹3.00 इनाम + <strong style="color:#fbbf24;">1x ₹100 जैकपॉट</strong>!',
+        btnSpinNow: "अभी चक्र घुमाएं",
+        inviteTitle: "इनवाइट करें और कमाएं",
+        inviteHeading: '1 दोस्त इनवाइट = <span style="color:#34d399;">₹50 सीधा बोनस!</span>',
+        inviteDesc: 'सिर्फ <strong style="color:#fbbf24;">6 दोस्तों</strong> को जोड़ें और सीधे <strong style="color:#34d399;">₹300</strong> पूरे करके तुरंत विथड्रॉ लगाएं!',
+        btnCopy: "कॉपी",
+        howToEarnTitle: "कैसे कमाएं? (4 आसान स्टेप्स)",
+        rulesTitle: "गेम नियम और विथड्रॉ टिप्स"
+      },
+      mr: {
+        headerTagline: "व्हिडिओ पहा • स्पिन करा • ₹ कमवा",
+        btnLogout: "लॉगआउट",
+        walletLabel: "💳 एकूण VIP वॉलेट बॅलन्स",
+        minWithdrawLabel: "किमान पैसे काढण्याची मर्यादा:",
+        btnWithdraw: "पैसे काढा",
+        btnAddCredit: "क्रेडिट जोडा",
+        statVideos: "पाहिलेले व्हिडिओ",
+        statSpins: "उरलेले स्पिन",
+        statInvites: "मित्र आमंत्रित",
+        dhamakaBadge: "डायरेक्ट विथड्रॉ ऑफर",
+        dhamakaText: '₹300 पर्यंत पोहोचता येत नाहीये? आता <span style="color:#fbbf24;">₹100 क्रेडिट जोडा</span> + <span style="color:#34d399;">₹200 बोनस</span> मिळवा = <span style="color:#fef08a; text-decoration:underline;">डायरेक्ट विथड्रॉ</span>!',
+        btnClaimDhamaka: "ऑफर घ्या",
+        videoSectionTitle: "8 VIP व्हिडिओ टास्क",
+        videoSectionSub: "प्रत्येक व्हिडिओ दिवसातून फक्त 1 वेळा बक्षीस देईल — आज पूर्ण झाल्यावर उद्यापर्यंत लॉक",
+        spinTitle: "लकी चक्र स्पिन",
+        spinSub: '₹0.50–₹3.00 बक्षीस + <strong style="color:#fbbf24;">1x ₹100 जॅकपॉट</strong>!',
+        btnSpinNow: "आता चक्र फिरवा",
+        inviteTitle: "मित्रांना बोलवा आणि कमवा",
+        inviteHeading: '1 मित्र आमंत्रण = <span style="color:#34d399;">₹50 थेट बोनस!</span>',
+        inviteDesc: 'फक्त <strong style="color:#fbbf24;">6 मित्रांना</strong> जोडा आणि थेट <strong style="color:#34d399;">₹300</strong> पूर्ण करून लगेच पैसे काढा!',
+        btnCopy: "कॉपी",
+        howToEarnTitle: "कसे कमवायचे? (4 सोप्या पायऱ्या)",
+        rulesTitle: "गेम नियम आणि टिप्स"
+      },
+      bn: {
+        headerTagline: "ভিডিও দেখুন • স্পিন করুন • ₹ আয় করুন",
+        btnLogout: "লগআউট",
+        walletLabel: "💳 মোট VIP ওয়ালেট ব্যালেন্স",
+        minWithdrawLabel: "সর্বনিম্ন উইথড্র সীমা:",
+        btnWithdraw: "টাকা তুলুন",
+        btnAddCredit: "ক্রেডিট যোগ করুন",
+        statVideos: "দেখা ভিডিও",
+        statSpins: "বাকি স্পিন",
+        statInvites: "আমন্ত্রিত বন্ধু",
+        dhamakaBadge: "ডাইরেক্ট উইথড্র অফার",
+        dhamakaText: '₹300 পর্যন্ত পৌঁছাতে পারছেন না? এখনই <span style="color:#fbbf24;">₹100 ক্রেডিট যোগ করুন</span> + <span style="color:#34d399;">₹200 বোনাস</span> পান = <span style="color:#fef08a; text-decoration:underline;">ডাইরেক্ট উইথড্র</span>!',
+        btnClaimDhamaka: "অফার নিন",
+        videoSectionTitle: "৮টি VIP ভিডিও টাস্ক",
+        videoSectionSub: "প্রতিটি ভিডিও দিনে মাত্র ১ বার পুরস্কার দেবে — আজ শেষ হলে কাল পর্যন্ত লক",
+        spinTitle: "লাকি চক্র স্পিন",
+        spinSub: '₹0.50–₹3.00 পুরস্কার + <strong style="color:#fbbf24;">1x ₹100 জ্যাকপট</strong>!',
+        btnSpinNow: "এখনই স্পিন করুন",
+        inviteTitle: "ইনভাইট এবং আয়",
+        inviteHeading: '১ জন বন্ধু ইনভাইট = <span style="color:#34d399;">₹50 সরাসরি বোনাস!</span>',
+        inviteDesc: 'মাত্র <strong style="color:#fbbf24;">৬ জন বন্ধুকে</strong> ইনভাইট করে সরাসরি <strong style="color:#34d399;">₹300</strong> পূর্ণ করুন এবং উইথড্র করুন!',
+        btnCopy: "কপি",
+        howToEarnTitle: "কীভাবে আয় করবেন? (৪টি সহজ ধাপ)",
+        rulesTitle: "গেমের নিয়ম ও উইথড্র টিপস"
+      }
+    };
+
+    let userState = null;
+    let activeVideoTask = null;
+    let activeTaskCanEarnToday = true;
+    let videoTimerInterval = null;
+    let remainingSeconds = 0;
+    let currentWheelAngle = 0;
+    let wheelSpinning = false;
+    let latestWithdrawMessage = "";
+    let latestCreditMessage = "";
+    let latestDhamakaMessage = "";
+    let toastTimeout = null;
+    let payoutPopupIndex = 0;
+
+    function getTodayKey() {
+      return new Date().toDateString();
+    }
+
+    function ensureDailyState(stateObj) {
+      if (!stateObj) return;
+      const today = getTodayKey();
+      if (stateObj.lastSpinDate !== today) {
+        stateObj.spinsLeft = MAX_DAILY_SPINS;
+        stateObj.lastSpinDate = today;
+      }
+      if (stateObj.dailyVideoDate !== today) {
+        stateObj.dailyVideoDate = today;
+        stateObj.claimedVideoIdsToday = [];
+      } else if (!Array.isArray(stateObj.claimedVideoIdsToday)) {
+        stateObj.claimedVideoIdsToday = [];
+      }
+    }
+
+    function isVideoLockedToday(taskId) {
+      if (!userState) return false;
+      ensureDailyState(userState);
+      return userState.claimedVideoIdsToday.includes(taskId);
+    }
+
+    function getUsersDB() {
+      try {
+        const raw = localStorage.getItem(USERS_DB_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function saveUsersDB(db) {
+      try { localStorage.setItem(USERS_DB_KEY, JSON.stringify(db)); } catch (e) {}
+    }
+
+    function persistCurrentUser() {
+      if (!userState || !userState.username) return;
+      const db = getUsersDB();
+      const key = userState.username.toLowerCase();
+      db[key] = userState;
+      saveUsersDB(db);
+      try { localStorage.setItem(CURRENT_USER_KEY, key); } catch (e) {}
+    }
+
+    function initApp() {
+      renderMarqueeTicker();
+      drawLuckyWheel();
+      restoreActiveSession();
+      startPeriodicLivePayouts();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initApp);
+    } else {
+      initApp();
+    }
+
+    function restoreActiveSession() {
+      let currentKey = null;
+      try { currentKey = localStorage.getItem(CURRENT_USER_KEY); } catch (e) {}
+      const db = getUsersDB();
+
+      if (currentKey && db[currentKey]) {
+        userState = db[currentKey];
+        ensureDailyState(userState);
+        persistCurrentUser();
+        document.getElementById("authOverlay").classList.add("hidden");
+        syncUI();
+      } else {
+        userState = null;
+        renderSavedAccountChips();
+        const hasAnyUsers = Object.keys(db).length > 0;
+        switchAuthTab(hasAnyUsers ? "login" : "signup");
+        document.getElementById("authOverlay").classList.remove("hidden");
+      }
+    }
+
+    function switchAuthTab(tab) {
+      const signupForm = document.getElementById("signupForm");
+      const loginForm = document.getElementById("loginForm");
+      const tabSignupBtn = document.getElementById("tabSignupBtn");
+      const tabLoginBtn = document.getElementById("tabLoginBtn");
+
+      document.getElementById("signupErrorMsg").classList.add("hidden");
+      document.getElementById("loginErrorMsg").classList.add("hidden");
+
+      if (tab === "signup") {
+        signupForm.classList.remove("hidden");
+        loginForm.classList.add("hidden");
+        tabSignupBtn.className = "tab-btn active-gold";
+        tabLoginBtn.className = "tab-btn";
+      } else {
+        loginForm.classList.remove("hidden");
+        signupForm.classList.add("hidden");
+        tabLoginBtn.className = "tab-btn active-emerald";
+        tabSignupBtn.className = "tab-btn";
+        renderSavedAccountChips();
+      }
+    }
+
+    function renderSavedAccountChips() {
+      const db = getUsersDB();
+      const keys = Object.keys(db);
+      const box = document.getElementById("savedAccountsHintBox");
+      const container = document.getElementById("savedAccountsChips");
+
+      if (keys.length === 0) {
+        box.classList.add("hidden");
+        return;
+      }
+
+      box.classList.remove("hidden");
+      container.innerHTML = keys.map((k) => {
+        const u = db[k];
+        return `<button type="button" onclick="prefillLoginAccount('${u.username}')" class="chip-btn">@${u.username} (₹${Number(u.balance || 0).toFixed(0)})</button>`;
+      }).join("");
+    }
+
+    function prefillLoginAccount(username) {
+      document.getElementById("loginUsernameInput").value = username;
+      document.getElementById("loginPasswordInput").focus();
+    }
+
+    function handleSignupSubmit(e) {
+      e.preventDefault();
+      const rawUser = document.getElementById("signupUsernameInput").value.trim().replace(/^@+/, "").replace(/\s+/g, "_");
+      const password = document.getElementById("signupPasswordInput").value.trim();
+      const errEl = document.getElementById("signupErrorMsg");
+
+      if (rawUser.length < 3 || password.length < 4) {
+        errEl.textContent = "Username kam se kam 3 akshar aur Password 4 akshar ka rakhein.";
+        errEl.classList.remove("hidden");
+        return;
+      }
+
+      const db = getUsersDB();
+      const lowerKey = rawUser.toLowerCase();
+
+      if (db[lowerKey]) {
+        errEl.innerHTML = `Username <strong>@${rawUser}</strong> pehle se bana hua hai! Upar <strong>Login</strong> tab mein jaakar password dalein.`;
+        errEl.classList.remove("hidden");
+        return;
+      }
+
+      errEl.classList.add("hidden");
+      const today = getTodayKey();
+      userState = {
+        username: rawUser,
+        password: password,
+        userId: String(Math.floor(100000 + Math.random() * 900000)),
+        balance: 0.00,
+        spinsLeft: MAX_DAILY_SPINS,
+        lastSpinDate: today,
+        dailyVideoDate: today,
+        claimedVideoIdsToday: [],
+        totalVideosWatched: 0,
+        invitedCount: 0,
+        language: "hinglish"
+      };
+
+      persistCurrentUser();
+      document.getElementById("authOverlay").classList.add("hidden");
+      syncUI();
+      showToast(`Account Created! VIP ID: ${userState.userId}`, "🎉");
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const rawUser = document.getElementById("loginUsernameInput").value.trim().replace(/^@+/, "").replace(/\s+/g, "_");
+      const password = document.getElementById("loginPasswordInput").value.trim();
+      const errEl = document.getElementById("loginErrorMsg");
+
+      const db = getUsersDB();
+      const foundUser = db[rawUser.toLowerCase()];
+
+      if (!foundUser) {
+        errEl.innerHTML = `Username <strong>@${rawUser}</strong> nahi mila! Pehle <strong>Create Account</strong> tab mein naya account banayein.`;
+        errEl.classList.remove("hidden");
+        return;
+      }
+
+      if (foundUser.password !== password) {
+        errEl.textContent = "Galat Password! Kripya apna sahi password dobara dalein.";
+        errEl.classList.remove("hidden");
+        return;
+      }
+
+      errEl.classList.add("hidden");
+      userState = foundUser;
+      ensureDailyState(userState);
+      persistCurrentUser();
+
+      document.getElementById("authOverlay").classList.add("hidden");
+      syncUI();
+      showToast(`Login Success! Welcome back @${userState.username}`, "👑");
+    }
+
+    function logoutUser() {
+      clearInterval(videoTimerInterval);
+      activeVideoTask = null;
+      closeModal("videoPlayerModal");
+      closeModal("profileModal");
+
+      try { localStorage.removeItem(CURRENT_USER_KEY); } catch (e) {}
+      userState = null;
+
+      document.getElementById("loginUsernameInput").value = "";
+      document.getElementById("loginPasswordInput").value = "";
+      document.getElementById("signupUsernameInput").value = "";
+      document.getElementById("signupPasswordInput").value = "";
+
+      switchAuthTab("login");
+      document.getElementById("authOverlay").classList.remove("hidden");
+      showToast("Logged out! Aapka wallet balance safe saved hai.", "🔒");
+    }
+
+    function syncUI() {
+      if (!userState) return;
+      ensureDailyState(userState);
+
+      document.getElementById("headerUsername").textContent = `@${userState.username}`;
+      document.getElementById("headerUserId").textContent = userState.userId;
+
+      const langSel = document.getElementById("languageSelector");
+      if (userState.language && TRANSLATIONS[userState.language]) {
+        langSel.value = userState.language;
+        applyLanguage(userState.language);
+      }
+
+      const bal = Number(userState.balance || 0);
+      document.getElementById("walletBalanceDisplay").textContent = bal.toFixed(2);
+
+      const pct = Math.min(100, Math.round((bal / MIN_WITHDRAW) * 100));
+      document.getElementById("withdrawProgressBar").style.width = `${pct}%`;
+      document.getElementById("progressPercentText").textContent = `${pct}%`;
+
+      if (bal >= MIN_WITHDRAW) {
+        document.getElementById("progressStatusText").innerHTML = `<span style="color:#34d399;">🎉 ₹300 Limit Unlocked! Ready to Withdraw</span>`;
+      } else {
+        document.getElementById("progressStatusText").textContent = `₹${(MIN_WITHDRAW - bal).toFixed(2)} more needed to unlock ₹300 Withdraw`;
+      }
+
+      const spins = typeof userState.spinsLeft === "number" ? userState.spinsLeft : MAX_DAILY_SPINS;
+      const invites = Number(userState.invitedCount || 0);
+
+      document.getElementById("statVideosCount").textContent = userState.totalVideosWatched || 0;
+      document.getElementById("statSpinsLeft").textContent = `${spins} / ${MAX_DAILY_SPINS}`;
+      document.getElementById("spinBadgeCount").textContent = `${spins} Free Spins`;
+      document.getElementById("statInvitesCount").textContent = invites;
+      document.getElementById("inviteEarnedDisplay").textContent = (invites * INVITE_BONUS).toFixed(2);
+      document.getElementById("referralLinkInput").value = `https://watch-earn-vip.app/?ref=${userState.userId}`;
+
+      refreshCreditTelegramLinks();
+      refreshDhamakaTelegramLink();
+      renderVideoTasks();
+    }
+
+    function changeLanguage(langCode) {
+      if (!TRANSLATIONS[langCode]) return;
+      if (userState) {
+        userState.language = langCode;
+        persistCurrentUser();
+      }
+      applyLanguage(langCode);
+    }
+
+    function applyLanguage(langCode) {
+      const dict = TRANSLATIONS[langCode] || TRANSLATIONS.hinglish;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) el.innerHTML = dict[key];
+      });
+    }
+
+    function renderMarqueeTicker() {
+      const track = document.getElementById("marqueeTrack");
+      track.innerHTML = [...LIVE_PAYOUTS, ...LIVE_PAYOUTS].map((item) => `
+        <span style="white-space:nowrap;">
+          <span style="color:#34d399;">✔</span>
+          User <strong style="color:#fff;">${item.user}</strong> successfully withdrew
+          <strong style="color:#fde68a;">${item.amount}</strong> (${item.method}) • ${item.time}
+        </span>
+      `).join("");
+    }
+
+    function startPeriodicLivePayouts() {
+      setInterval(() => {
+        if (!userState) return;
+        const entry = LIVE_PAYOUTS[payoutPopupIndex % LIVE_PAYOUTS.length];
+        payoutPopupIndex++;
+        const popup = document.getElementById("livePayoutPopup");
+        document.getElementById("livePopupTitle").textContent = `User ${entry.user} successfully withdrew ${entry.amount}!`;
+        document.getElementById("livePopupSub").textContent = `${entry.method} Payout Verified • Just now`;
+        popup.classList.remove("hidden");
+        setTimeout(() => popup.classList.add("hidden"), 4200);
+      }, 9000);
+    }
+
+    function renderVideoTasks() {
+      const grid = document.getElementById("videoTasksGrid");
+      grid.innerHTML = VIDEO_TASKS.map((task) => {
+        const lockedToday = isVideoLockedToday(task.id);
+        return `
+          <div class="video-item ${lockedToday ? "locked" : ""}">
+            <div class="video-left">
+              <div class="video-thumb ${lockedToday ? "" : "gold-bg"}" style="${lockedToday ? "background:#1b2336; color:#fbbf24; border:1px solid #2c3752;" : ""}">
+                ${lockedToday ? "🔒" : "▶"}
+              </div>
+              <div style="min-width:0;">
+                <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                  <span class="badge-pill">${task.durationLabel}</span>
+                  <span style="font-size:10px; font-weight:700; color:${lockedToday ? "#fbbf24" : "#94a3b8"};">
+                    ${lockedToday ? "Locked Until Tomorrow" : task.tag}
+                  </span>
+                </div>
+                <div style="font-size:14px; font-weight:800; color:#fff; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+                  ${task.title}
+                </div>
+                <div style="font-size:12px; font-weight:900; color:${lockedToday ? "#94a3b8" : "#34d399"}; margin-top:2px;">
+                  ${lockedToday ? "Claimed Today (₹0 extra today)" : `+₹${task.reward.toFixed(2)} (1x Today)`}
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onclick="startVideoTask(${task.id})"
+              class="btn ${lockedToday ? "btn-amber-outline" : "emerald-bg"}"
+              style="padding:9px 12px; font-size:12px; flex-shrink:0;"
+            >
+              ${lockedToday ? "🔒 Locked" : "▶ Watch"}
+            </button>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function startVideoTask(taskId) {
+      if (!userState) return;
+      const task = VIDEO_TASKS.find((t) => t.id === taskId);
+      if (!task) return;
+
+      const alreadyClaimedToday = isVideoLockedToday(task.id);
+      activeVideoTask = task;
+      activeTaskCanEarnToday = !alreadyClaimedToday;
+      remainingSeconds = task.duration;
+
+      document.getElementById("playerModalDurationBadge").textContent = alreadyClaimedToday
+        ? `${task.durationLabel} • Locked Today`
+        : `${task.durationLabel} • 1x Daily Reward`;
+      document.getElementById("playerModalTitle").textContent = task.title;
+      document.getElementById("playerModalReward").innerHTML = alreadyClaimedToday
+        ? `<span style="color:#fbbf24;">₹0.00 (Aaj ka reward mil chuka — kal unlock hoga)</span>`
+        : `₹${task.reward.toFixed(2)}`;
+      document.getElementById("warningRewardText").textContent = alreadyClaimedToday
+        ? "Aaj ka watch progress"
+        : `₹${task.reward.toFixed(2)}`;
+      document.getElementById("playerProgressBar").style.width = "0%";
+      hideEarlyExitWarning();
+      updateCountdownDisplay();
+
+      openModal("videoPlayerModal");
+
+      clearInterval(videoTimerInterval);
+      videoTimerInterval = setInterval(() => {
+        remainingSeconds--;
+        const elapsed = task.duration - remainingSeconds;
+        const pct = Math.min(100, Math.round((elapsed / task.duration) * 100));
+        document.getElementById("playerProgressBar").style.width = `${pct}%`;
+        updateCountdownDisplay();
+
+        if (remainingSeconds <= 0) {
+          clearInterval(videoTimerInterval);
+          completeVideoTaskReward();
+        }
+      }, 1000);
+    }
+
+    function updateCountdownDisplay() {
+      const mins = String(Math.floor(remainingSeconds / 60)).padStart(2, "0");
+      const secs = String(remainingSeconds % 60).padStart(2, "0");
+      document.getElementById("playerCountdownDisplay").textContent = `${mins}:${secs}`;
+    }
+
+    function completeVideoTaskReward() {
+      if (!activeVideoTask || !userState) return;
+      ensureDailyState(userState);
+
+      const task = activeVideoTask;
+      userState.totalVideosWatched = (userState.totalVideosWatched || 0) + 1;
+
+      if (activeTaskCanEarnToday && !userState.claimedVideoIdsToday.includes(task.id)) {
+        userState.balance = Number((Number(userState.balance || 0) + task.reward).toFixed(2));
+        userState.claimedVideoIdsToday.push(task.id);
+        persistCurrentUser();
+        closeModal("videoPlayerModal");
+        syncUI();
+        showToast(`+₹${task.reward.toFixed(2)} credited! "${task.title}" aaj ke liye lock ho gaya (kal unlock hoga).`, "🔒");
+      } else {
+        persistCurrentUser();
+        closeModal("videoPlayerModal");
+        syncUI();
+        showToast(`"${task.title}" aaj ke liye pehle se lock hai — kal naye din reward milega!`, "⏳");
+      }
+
+      activeVideoTask = null;
+      activeTaskCanEarnToday = true;
+    }
+
+    function attemptCloseVideoModal() {
+      if (remainingSeconds > 0) {
+        document.getElementById("earlyExitWarning").classList.remove("hidden");
+      } else {
+        forceCloseVideoModal();
+      }
+    }
+
+    function hideEarlyExitWarning() {
+      document.getElementById("earlyExitWarning").classList.add("hidden");
+    }
+
+    function forceCloseVideoModal() {
+      clearInterval(videoTimerInterval);
+      activeVideoTask = null;
+      activeTaskCanEarnToday = true;
+      closeModal("videoPlayerModal");
+    }
+
+    function drawLuckyWheel() {
+      const canvas = document.getElementById("wheelCanvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const radius = cx - 4;
+      const count = WHEEL_SEGMENTS.length;
+      const arc = (2 * Math.PI) / count;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < count; i++) {
+        const seg = WHEEL_SEGMENTS[i];
+        const startAngle = i * arc - Math.PI / 2;
+        const endAngle = startAngle + arc;
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fillStyle = seg.color;
+        ctx.fill();
+        ctx.lineWidth = seg.jackpot ? 3 : 2;
+        ctx.strokeStyle = seg.jackpot ? "#fef08a" : "#f5b82e";
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(startAngle + arc / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = seg.text;
+        ctx.font = seg.jackpot ? "900 10px sans-serif" : "900 13px sans-serif";
+        ctx.fillText(seg.label, radius - 12, 4);
+        ctx.restore();
+      }
+    }
+
+    function spinLuckyWheel() {
+      if (!userState || wheelSpinning) return;
+      ensureDailyState(userState);
+
+      if ((userState.spinsLeft || 0) <= 0) {
+        showToast("Aaj ke 2 free spins khatam ho gaye! Kal phir try karein.", "⏳");
+        return;
+      }
+
+      wheelSpinning = true;
+      userState.spinsLeft -= 1;
+      persistCurrentUser();
+      syncUI();
+
+      let winningIndex = Math.random() < 0.08 ? 7 : Math.floor(Math.random() * 7);
+      const sliceDeg = 360 / WHEEL_SEGMENTS.length;
+      const targetSliceCenter = winningIndex * sliceDeg + sliceDeg / 2;
+      const extraSpins = 360 * 6;
+      const finalRotation = currentWheelAngle + extraSpins + (360 - targetSliceCenter - (currentWheelAngle % 360));
+      currentWheelAngle = finalRotation;
+
+      document.getElementById("wheelCanvas").style.transform = `rotate(${finalRotation}deg)`;
+
+      setTimeout(() => {
+        if (!userState) { wheelSpinning = false; return; }
+        const wonObj = WHEEL_SEGMENTS[winningIndex];
+        userState.balance = Number((Number(userState.balance || 0) + wonObj.value).toFixed(2));
+        persistCurrentUser();
+        syncUI();
+        wheelSpinning = false;
+
+        if (wonObj.jackpot) {
+          showToast(`JACKPOT! +₹100.00 Mega Bonus added to Wallet!`, "🏆");
+        } else {
+          showToast(`Lucky Chakra Win! +₹${wonObj.value.toFixed(2)} credited!`, "🎡");
+        }
+      }, 4300);
+    }
+
+    function copyReferralLink() {
+      const link = document.getElementById("referralLinkInput").value;
+      copyTextFallback(link, "Referral Link copied! Ab friends ko bhejein aur ₹50/friend kamayein.");
+    }
+
+    function shareInviteLink(platform) {
+      if (!userState) return;
+      const link = document.getElementById("referralLinkInput").value;
+      const text = `🎬 Watch & Earn VIP par video dekh kar roz paise kamayein! Mere link se join karein (ID: ${userState.userId}): ${link}`;
+      const encoded = encodeURIComponent(text);
+      if (platform === "telegram") {
+        window.open(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encoded}`, "_blank");
+      } else {
+        window.open(`https://api.whatsapp.com/send?text=${encoded}`, "_blank");
+      }
+    }
+
+    function simulateFriendInvite() {
+      if (!userState) return;
+      userState.invitedCount = (userState.invitedCount || 0) + 1;
+      userState.balance = Number((Number(userState.balance || 0) + INVITE_BONUS).toFixed(2));
+      persistCurrentUser();
+      syncUI();
+      showToast(`Friend Verified! +₹${INVITE_BONUS} Invite Bonus added!`, "🤝");
+    }
+
+    function handleWithdrawClick() {
+      if (!userState) return;
+      const bal = Number(userState.balance || 0);
+      if (bal < MIN_WITHDRAW) {
+        document.getElementById("shortfallCurrentBal").textContent = bal.toFixed(2);
+        openModal("shortfallModal");
+        return;
+      }
+      const amtInput = document.getElementById("withdrawAmountInput");
+      amtInput.max = bal.toFixed(2);
+      amtInput.value = bal.toFixed(2);
+      openModal("withdrawFormModal");
+    }
+
+    function submitWithdrawRequest(e) {
+      e.preventDefault();
+      if (!userState) return;
+
+      const amount = parseFloat(document.getElementById("withdrawAmountInput").value);
+      const upi = document.getElementById("withdrawUpiInput").value.trim();
+
+      if (isNaN(amount) || amount < MIN_WITHDRAW || amount > userState.balance) {
+        showToast(`Amount ₹300 se ₹${userState.balance.toFixed(2)} ke beech hona chahiye.`, "⚠️");
+        return;
+      }
+
+      userState.balance = Number((userState.balance - amount).toFixed(2));
+      persistCurrentUser();
+      syncUI();
+
+      const reqId = `WD-${Math.floor(10000 + Math.random() * 90000)}`;
+      document.getElementById("slipReqId").textContent = reqId;
+      document.getElementById("slipUser").textContent = `@${userState.username} (${userState.userId})`;
+      document.getElementById("slipUpi").textContent = upi;
+      document.getElementById("slipAmount").textContent = `₹${amount.toFixed(2)}`;
+
+      latestWithdrawMessage =
+        `👑 WATCH & EARN VIP — WITHDRAW REQUEST\n` +
+        `• Request ID: ${reqId}\n` +
+        `• Username: @${userState.username}\n` +
+        `• VIP User ID: ${userState.userId}\n` +
+        `• UPI / Number: ${upi}\n` +
+        `• Withdraw Amount: ₹${amount.toFixed(2)}\n\n` +
+        `Hello @${ADMIN_TELEGRAM}, please verify & approve my withdrawal.`;
+
+      document.getElementById("telegramWithdrawAnchor").href =
+        `https://t.me/${ADMIN_TELEGRAM}?text=${encodeURIComponent(latestWithdrawMessage)}`;
+
+      closeModal("withdrawFormModal");
+      openModal("withdrawSuccessModal");
+    }
+
+    function copyWithdrawSlip() {
+      copyTextFallback(latestWithdrawMessage, "Withdraw slip copied! Ab @Royalbhaipredit654h ko paste karke bhej dein.");
+    }
+
+    function openAddCreditModal(presetAmt) {
+      if (!userState) return;
+      document.getElementById("creditAmountInput").value = presetAmt || 100;
+      refreshCreditTelegramLinks();
+      openModal("addCreditModal");
+    }
+
+    function setCreditAmount(amt) {
+      document.getElementById("creditAmountInput").value = amt;
+      refreshCreditTelegramLinks();
+    }
+
+    function refreshCreditTelegramLinks() {
+      if (!userState) return;
+      const amt = Math.max(10, parseInt(document.getElementById("creditAmountInput").value, 10) || 100);
+      document.getElementById("creditBtnAmountText").textContent = amt;
+
+      latestCreditMessage =
+        `⚡ WATCH & EARN VIP — ADD CREDIT REQUEST\n` +
+        `• Username: @${userState.username}\n` +
+        `• VIP User ID: ${userState.userId}\n` +
+        `• Current Balance: ₹${Number(userState.balance || 0).toFixed(2)}\n` +
+        `• Add Credit Amount: ₹${amt}\n\n` +
+        `Hello @${ADMIN_TELEGRAM}, mujhe apne wallet me ₹${amt} credit add karwana hai.`;
+
+      document.getElementById("telegramCreditAnchor").href =
+        `https://t.me/${ADMIN_TELEGRAM}?text=${encodeURIComponent(latestCreditMessage)}`;
+    }
+
+    function copyCreditSlip() {
+      if (!latestCreditMessage) refreshCreditTelegramLinks();
+      copyTextFallback(latestCreditMessage, "Add Credit message copied! Ab @Royalbhaipredit654h ko DM me paste karein.");
+    }
+
+    function openDhamakaOfferModal() {
+      if (!userState) return;
+      refreshDhamakaTelegramLink();
+      openModal("dhamakaOfferModal");
+    }
+
+    function refreshDhamakaTelegramLink() {
+      if (!userState) return;
+      latestDhamakaMessage =
+        `🔥 WATCH & EARN VIP — DHAMAKA DIRECT WITHDRAW OFFER\n` +
+        `• Username: @${userState.username}\n` +
+        `• VIP User ID: ${userState.userId}\n` +
+        `• Current Balance: ₹${Number(userState.balance || 0).toFixed(2)}\n` +
+        `• Offer: Add ₹100 Credit + ₹200 Bonus = Direct Withdraw\n\n` +
+        `Hello @${ADMIN_TELEGRAM}, mujhe ₹100 Add Credit + ₹200 Bonus Dhamaka Offer se Direct Withdraw karna hai.`;
+
+      document.getElementById("telegramDhamakaAnchor").href =
+        `https://t.me/${ADMIN_TELEGRAM}?text=${encodeURIComponent(latestDhamakaMessage)}`;
+    }
+
+    function copyDhamakaSlip() {
+      if (!latestDhamakaMessage) refreshDhamakaTelegramLink();
+      copyTextFallback(latestDhamakaMessage, "Dhamaka Offer message copied! Ab @Royalbhaipredit654h ko DM me paste karein.");
+    }
+
+    function openProfileModal() {
+      if (!userState) return;
+      document.getElementById("profileModalUsername").textContent = `@${userState.username}`;
+      document.getElementById("profileModalUserId").textContent = userState.userId;
+      document.getElementById("profileModalBalance").textContent = `₹${Number(userState.balance || 0).toFixed(2)}`;
+      document.getElementById("profileModalTasks").textContent = userState.totalVideosWatched || 0;
+      document.getElementById("profileModalInvites").textContent = userState.invitedCount || 0;
+      openModal("profileModal");
+    }
+
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove("hidden");
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add("hidden");
+    }
+
+    function showToast(msg, icon = "✨") {
+      const toast = document.getElementById("appToast");
+      document.getElementById("appToastIcon").textContent = icon;
+      document.getElementById("appToastText").textContent = msg;
+      toast.classList.remove("hidden");
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.add("hidden"), 3600);
+    }
+
+    function copyTextFallback(text, successMessage) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showToast(successMessage, "📋");
+      } catch (e) {
+        showToast("Copy failed — please use the Telegram button directly.", "⚠️");
+      }
+      document.body.removeChild(textarea);
+    }
+  </script>
+</body>
+</html>
